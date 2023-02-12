@@ -1,13 +1,27 @@
 package pl.edu.agh.hangman;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Hangman {
 
     //lista slow
-    private static String[] slowa = {"komputer", "pies", "kot", "samochod"};
+    private static List<String> slowa;
+
+    static {
+        try {
+            slowa = readFile("C:\\Users\\student4\\Desktop\\hangman_clone\\javaHanman\\target\\classes\\slowa.txt");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     // losowanie slowa
-    private static String losoweSlowo = slowa[(int) (Math.random() * slowa.length)];
+    private static String losoweSlowo = slowa.get((int) (Math.random() * slowa.size()));
     //ukrycie losowego slowa
     private static String ukryteSlowo = new String(new char[losoweSlowo.length()]).replace("\0", "_");
 
@@ -90,6 +104,24 @@ public class Hangman {
                     "========"
     };
 
+    private static List<String> readFile(String filename) throws Exception {
+        List<String> array = new ArrayList<>();
+        BufferedReader br
+                = Files.newBufferedReader(Paths.get(filename));
+        try {
+            int i = 0;
+            while (br.readLine() != null) {
+                i++;
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return array;
+    }
+
+
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -100,7 +132,9 @@ public class Hangman {
         sprawdzSlowo(slowo);
         }
         scanner.close();
+        System.out.println("Przegrana. Prawidlowe slowo: " + losoweSlowo);
     }
+
 }
 
 

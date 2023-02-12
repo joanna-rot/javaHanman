@@ -1,5 +1,8 @@
 package pl.edu.agh.hangman;
 
+import static pl.edu.agh.hangman.FileScannerToArray.scanFile;
+
+
 public class Hangman {
 
     public static final String[] HANGMANPICS = new String[]{
@@ -55,5 +58,11 @@ public class Hangman {
     };
 
     public static void main(String[] args) {
+
+        scanFile("src/main/resources/slowa.txt");
+
     }
+
+
+
 }

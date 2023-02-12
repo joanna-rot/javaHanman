@@ -1,13 +1,15 @@
 package pl.edu.agh.hangman;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.*;
 
 public class Hangman {
 
     //lista slow
-    private static List<String> slowa = ;
+    private static List<String> slowa = scanFile("target/classes/slowa.txt");
 
     private static String losoweSlowo = slowa.get(new Random().nextInt(slowa.size()));
 
@@ -92,28 +94,24 @@ public class Hangman {
                     "========"
     };
 
-//    private static List<String> readFile(String filename) throws Exception {
-//        List<String> array = new ArrayList<>();
-//        BufferedReader br
-//                = Files.newBufferedReader(Paths.get(filename));
-//        try {
-//            int i = 0;
-//            while (br.readLine() != null) {
-//                i++;
-//            }
-//            br.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return array;
-//    }
-//
-//
+    //przekopiowane z klasy FileScannerToArray
+    public static ArrayList<String> scanFile(String filename) {
+        ArrayList<String> words = new ArrayList<>();
+        File wordlist = new File(filename);
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(wordlist));
+            String st;
+            while ((st = br.readLine()) != null) {
+                words.add(st);
+            }
+        } catch (IOException x) {
+            System.err.format("IOException; %s", x);
+        }
+        return words;
+    }
+
 
     public static void main(String[] args) {
-
-        FileScannerToArray fileScannerToArray = new FileScannerToArray();
-        
 
         Scanner scanner = new Scanner(System.in);
         while (count < HANGMANPICS.length && ukryteSlowo.contains("_")) {
@@ -123,7 +121,6 @@ public class Hangman {
         sprawdzSlowo(slowo);
         }
         scanner.close();
-        System.out.println("Przegrana. Prawidlowe slowo: " + losoweSlowo);
     }
 
 }

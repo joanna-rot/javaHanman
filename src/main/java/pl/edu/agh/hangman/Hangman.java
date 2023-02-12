@@ -1,28 +1,16 @@
 package pl.edu.agh.hangman;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Hangman {
 
     //lista slow
-    private static List<String> slowa;
+    private static List<String> slowa = ;
 
-    static {
-        try {
-            slowa = readFile("C:\\Users\\student4\\Desktop\\hangman_clone\\javaHanman\\target\\classes\\slowa.txt");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+    private static String losoweSlowo = slowa.get(new Random().nextInt(slowa.size()));
 
-    // losowanie slowa
-    private static String losoweSlowo = slowa.get((int) (Math.random() * slowa.size()));
-    //ukrycie losowego slowa
     private static String ukryteSlowo = new String(new char[losoweSlowo.length()]).replace("\0", "_");
 
     private static int count = 0;
@@ -104,25 +92,28 @@ public class Hangman {
                     "========"
     };
 
-    private static List<String> readFile(String filename) throws Exception {
-        List<String> array = new ArrayList<>();
-        BufferedReader br
-                = Files.newBufferedReader(Paths.get(filename));
-        try {
-            int i = 0;
-            while (br.readLine() != null) {
-                i++;
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return array;
-    }
-
-
+//    private static List<String> readFile(String filename) throws Exception {
+//        List<String> array = new ArrayList<>();
+//        BufferedReader br
+//                = Files.newBufferedReader(Paths.get(filename));
+//        try {
+//            int i = 0;
+//            while (br.readLine() != null) {
+//                i++;
+//            }
+//            br.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return array;
+//    }
+//
+//
 
     public static void main(String[] args) {
+
+        FileScannerToArray fileScannerToArray = new FileScannerToArray();
+        
 
         Scanner scanner = new Scanner(System.in);
         while (count < HANGMANPICS.length && ukryteSlowo.contains("_")) {

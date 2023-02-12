@@ -124,6 +124,7 @@ public class Hangman {
 
     public static void main(String[] args) {
 
+       
         Scanner scanner = new Scanner(System.in);
         while (count < HANGMANPICS.length && ukryteSlowo.contains("_")) {
         System.out.println("Podaj litere");
@@ -133,6 +134,11 @@ public class Hangman {
         }
         scanner.close();
         System.out.println("Przegrana. Prawidlowe slowo: " + losoweSlowo);
+
+
+
+
+
     }
 
 }

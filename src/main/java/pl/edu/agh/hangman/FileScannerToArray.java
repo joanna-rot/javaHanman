@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class FileScannerToArray {
 
 
-    public static void scanFile(String filename) {
+    public static ArrayList<String> scanFile(String filename) {
         ArrayList<String> words = new ArrayList<>();
         File wordlist = new File(filename);
         try {
@@ -21,5 +21,6 @@ public class FileScannerToArray {
         } catch (IOException x) {
             System.err.format("IOException; %s", x);
         }
+        return words;
     }
 }
